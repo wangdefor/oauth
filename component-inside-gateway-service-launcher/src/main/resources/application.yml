@@ -1,0 +1,38 @@
+server:
+  port: 8888   # HTTP (Tomcat) port
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+spring:
+  security:
+    # oauth2配置
+    oauth2:
+      resourceserver:
+        jwt:
+#          获取公钥的url地址          也可以通过 public-key-location: classpath: 来指定公钥的位置
+          jwk-set-uri: http://${AUTH_SERVICE_HOST:localhost}:7085/v1/authentication/jwks.json
+##mybatis的相关配置
+#mybatis:
+#  #mapper配置文件
+#  mapper-locations: classpath:mapper/*.xml
+#  type-aliases-package: org.example.model
+#  config-location: classpath:mybatis-config.xml
+
+ignore:
+  urls:
+    - /error
+    - /favicon.ico
+    - /actuator/**
+    - /api/auth/**
+    - /api/user/**
+    - /api/exam/**
+    - /api/msc/**
+    - /health
+    - /metrics/**
+    - /loggers/**
+    - /query/user/**
